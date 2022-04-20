@@ -1,17 +1,19 @@
 /**
  * SYST 17796 Project Base code.
- * Students can modify and extend to implement their game.
- * Add your name as an author and the date!
+ * A Card of some sort.
+ * Deliverable 3
+ * Gregory Lee Wo, Sebastian Villafane Ramos, Vicente Manuel Angeles, Yi Fei Wang
+ * Date: 20/04/2022
  */
 package grp5_cardgame;
 
-import ca.sheridancollege.project.*;
-
 /**
- * A class to be used as the base Card class for the project. Must be general enough to be instantiated for any Card
- * game. Students wishing to add to the code should remember to add themselves as a modifier.
+ * A class to be used as the base Card class for the project. Must be general
+ * enough to be instantiated for any Card game. Students wishing to add to the
+ * code should remember to add themselves as a modifier.
  *
  * @author dancye
+ * @author Paul Bonenfant Jan 2020
  */
 public abstract class Card {
     //default modifier for child classes
@@ -19,7 +21,8 @@ public abstract class Card {
     /**
      * Students should implement this method for their specific children classes
      *
-     * @return a String representation of a card. Could be an UNO card, a regular playing card etc.
+     * @return a String representation of a card. Could be an UNO card, a
+     * regular playing card etc.
      */
     @Override
     public abstract String toString();

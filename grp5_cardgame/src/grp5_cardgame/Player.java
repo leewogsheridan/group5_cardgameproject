@@ -1,14 +1,15 @@
 /**
  * SYST 17796 Project Base code.
- * Students can modify and extend to implement their game.
- * Add your name as an author and the date!
+ * A Player of some sort.
+ * Deliverable 3
+ * Gregory Lee Wo, Sebastian Villafane Ramos, Vicente Manuel Angeles, Yi Fei Wang
+ * Date: 20/04/2022
  */
 package grp5_cardgame;
 
-import ca.sheridancollege.project.*;
-
 /**
- * A class that models each Player in the game. Players have an identifier, which should be unique.
+ * A class that models each Player in the game. Players have an identifier,
+ * which should be unique.
  *
  * @author dancye
  * @author Paul Bonenfant Jan 2020
@@ -43,8 +44,8 @@ public abstract class Player {
     }
 
     /**
-     * The method to be overridden when you subclass the Player class with your specific type of Player and filled in
-     * with logic to play your game.
+     * The method to be overridden when you subclass the Player class with your
+     * specific type of Player and filled in with logic to play your game.
      */
     public abstract void play();
 

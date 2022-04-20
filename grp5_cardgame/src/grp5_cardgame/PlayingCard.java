@@ -1,29 +1,35 @@
+/**
+ * PlayingCard Class.
+ * This class extends Card and models a playing card suitable for Blackjack.
+ * Deliverable 3
+ * Gregory Lee Wo, Sebastian Villafane Ramos, Vicente Manuel Angeles, Yi Fei Wang
+ * Date: 20/04/2022
+ */
 package grp5_cardgame;
 
 /**
  *
  * @author 727
+ * @author Gregory Lee Wo 2022
  */
 public class PlayingCard extends Card {
 
     private final Value value;
     private final Suit suit;
-    
+
     public PlayingCard(Value value, Suit suit) {
         this.value = value;
         this.suit = suit;
     }
-    
 
-    
     public Value getValue() {
         return value;
     }
-    
+
     public Suit getSuit() {
         return suit;
     }
-    
+
     @Override
     public String toString() {
         return value + " of " + suit;
