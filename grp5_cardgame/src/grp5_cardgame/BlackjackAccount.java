@@ -17,14 +17,62 @@ import java.io.Serializable;
 public class BlackjackAccount extends Player implements Serializable {
 
     private double balance;
+    private int wins;
 
-    public BlackjackAccount(String name) {
+    public BlackjackAccount(String name, int wins, double balance) {
         super(name);
+        this.wins = wins;
+        this.balance = balance;
+    }
+
+    /**
+     * @return the balance
+     */
+    public double getBalance() {
+        return balance;
+    }
+
+    /**
+     * @param balance the balance to set
+     */
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
+
+    /**
+     * @return the wins
+     */
+    public int getWins() {
+        return wins;
+    }
+
+    /**
+     * @param wins the wins to set
+     */
+    public void setWins(int wins) {
+        this.wins = wins;
+    }
+
+    public void won() {
+        wins++;
     }
 
     @Override
     public void play() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public double widthdraw(int amount) {
+        if (balance < amount) {
+            System.out.println("Insufficient funds.");
+            return 0;
+        } else {
+            return balance -= amount;//********** will this work?
+        }
+    }
+
+    public void deposit(double funds) {
+        balance += funds;
     }
 
 }

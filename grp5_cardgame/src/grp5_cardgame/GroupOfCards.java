@@ -55,4 +55,15 @@ public class GroupOfCards {
         this.size = size;
     }
 
+    public void create() {
+        cards = new ArrayList<Card>(size);
+
+        int count = 0;
+        for (int i = 0; i < 4; i++) {
+            for (int j = 2; j < 15; j++) {
+                cards.add(new PlayingCard(Value.ACE, Suit.DIAMONDS));//********
+            }
+        }
+    }
+    
 }//end class

@@ -16,7 +16,9 @@ public class Blackjack extends Game {
 
     private DealerHand dealerHand;
     private PlayerHand playerHand;
-
+    private Player player;
+    private double betAmount;
+    
     /**
      * @param args the command line arguments
      */
@@ -47,8 +49,8 @@ public class Blackjack extends Game {
 
     }
 
-    public void bet(double amount) {
-
+    public void bet(double betAmount) {
+        this.betAmount = betAmount;
     }
 
     public double distributeWinnings() {
