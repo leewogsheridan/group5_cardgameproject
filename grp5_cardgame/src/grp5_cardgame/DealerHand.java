@@ -14,4 +14,7 @@ package grp5_cardgame;
  */
 public class DealerHand extends GroupOfCards {
 
+    public DealerHand(int size) {
+        super(size);
+    }
 }

@@ -14,6 +14,9 @@ package grp5_cardgame;
  */
 public class Blackjack extends Game {
 
+    private DealerHand dealerHand;
+    private PlayerHand playerHand;
+
     /**
      * @param args the command line arguments
      */
@@ -22,14 +25,33 @@ public class Blackjack extends Game {
         //vicente angeles
     }
 
+    public Blackjack(String name) {
+        super(name);
+    }
+
     @Override
     public void play() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+
     }
 
     @Override
     public void declareWinner() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+
     }
-    
+
+    public void hit() {
+
+    }
+
+    public void stand() {
+
+    }
+
+    public void bet(double amount) {
+
+    }
+
+    public double distributeWinnings() {
+        return 0;
+    }
 }
