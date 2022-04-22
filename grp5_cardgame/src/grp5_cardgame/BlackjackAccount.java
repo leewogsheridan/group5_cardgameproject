@@ -62,7 +62,7 @@ public class BlackjackAccount extends Player implements Serializable {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    public double widthdraw(int amount) {
+    public double widthdraw(double amount) {
         if (balance < amount) {
             System.out.println("Insufficient funds.");
             return 0;
@@ -70,7 +70,10 @@ public class BlackjackAccount extends Player implements Serializable {
             return balance -= amount;//********** will this work?
         }
     }
-
+    
+    public void deduct(double funds) {
+        balance -= funds;
+    }
     public void deposit(double funds) {
         balance += funds;
     }

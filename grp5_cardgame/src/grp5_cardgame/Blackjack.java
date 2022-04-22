@@ -7,6 +7,12 @@
  */
 package grp5_cardgame;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.EOFException;
+
 /**
  *
  * @author 727
@@ -16,16 +22,10 @@ public class Blackjack extends Game {
 
     private DealerHand dealerHand;
     private PlayerHand playerHand;
-    private Player player;
+    private GroupOfCards deck;
+    private BlackjackAccount player;
     private double betAmount;
-    
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-        //vicente angeles
-    }
+    private boolean won;
 
     public Blackjack(String name) {
         super(name);
@@ -33,12 +33,24 @@ public class Blackjack extends Game {
 
     @Override
     public void play() {
+        System.out.println("Blackjack Game:");
+        deck = new GroupOfCards(52);
+        deck.create();
+        playerHand = new PlayerHand(0);
+        dealerHand = new DealerHand(0);
+        loadPlayer();
+        won = false;
 
     }
 
     @Override
     public void declareWinner() {
-
+        if (won) {
+            System.out.println("Congratulations " + player.getName() + "! You have beat the computer and won $" + betAmount);
+        } else {
+            System.out.println("GG " + player.getName() + "! ff go next. You lost $" + betAmount);
+        }
+        distributeWinnings();
     }
 
     public void hit() {
@@ -53,7 +65,29 @@ public class Blackjack extends Game {
         this.betAmount = betAmount;
     }
 
-    public double distributeWinnings() {
-        return 0;
+    public void savePlayer() {
+        try ( ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream("player.dat"));) {
+            output.writeObject(player);
+        } catch (Exception e) {
+            System.out.println("ERROR saving player:" + e);
+        }
+    }
+
+    public void loadPlayer() {
+        try ( ObjectInputStream input = new ObjectInputStream(new FileInputStream("player.dat"));) {
+            player = (BlackjackAccount) input.readObject();
+        } catch (EOFException f) {
+            player = new BlackjackAccount("Player1", 0, 0);
+        } catch (Exception e) {
+            System.out.println("Error getting account: " + e);
+        }
+    }
+
+    public void distributeWinnings() {
+        if (won) {
+            player.deposit(betAmount);
+        } else {
+            player.deduct(betAmount);
+        }
     }
 }
