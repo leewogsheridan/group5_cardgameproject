@@ -40,9 +40,14 @@ public class Blackjack extends Game {
         dealerHand = new DealerHand(0);
         loadPlayer();
         won = false;
-
+        savePlayer();
     }
 
+    public PlayingCard giveRandomCard() {
+        deck.shuffle();
+        return deck.subtract();
+    }
+    
     @Override
     public void declareWinner() {
         if (won) {
@@ -82,7 +87,7 @@ public class Blackjack extends Game {
             System.out.println("Error getting account: " + e);
         }
     }
-
+    
     public void distributeWinnings() {
         if (won) {
             player.deposit(betAmount);

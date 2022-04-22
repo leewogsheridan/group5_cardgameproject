@@ -21,11 +21,12 @@ import java.util.Collections;
 public class GroupOfCards {
 
     //The group of cards, stored in an ArrayList
-    private ArrayList<Card> cards;
+    private ArrayList<PlayingCard> cards;
     private int size;//the size of the grouping
 
     public GroupOfCards(int size) {
         this.size = size;
+        cards = new ArrayList<>(size);
     }
 
     /**
@@ -33,7 +34,7 @@ public class GroupOfCards {
      *
      * @return the group of cards.
      */
-    public ArrayList<Card> getCards() {
+    public ArrayList<PlayingCard> getCards() {
         return cards;
     }
 
@@ -56,14 +57,29 @@ public class GroupOfCards {
     }
 
     public void create() {
-        cards = new ArrayList<Card>(size);
+        Suit[] suits = Suit.values();
+        Value[] values = Value.values();
+        cards = new ArrayList<>(size);
 
-        int count = 0;
         for (int i = 0; i < 4; i++) {
-            for (int j = 2; j < 15; j++) {
-                cards.add(new PlayingCard(Value.ACE, Suit.DIAMONDS));//********
+            for (int j = 0; j < 13; j++) {
+                cards.add(new PlayingCard(values[j], suits[i]));
             }
         }
     }
+
+    public void add(PlayingCard card) {
+        cards.add(card);
+    }
     
+    public PlayingCard subtract() {
+        PlayingCard c = cards.get(0);
+        cards.remove(0);
+        return c;
+    }
+
+    public void clear() {
+        cards.clear();
+    }
+
 }//end class
