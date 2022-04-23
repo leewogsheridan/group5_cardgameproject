@@ -77,5 +77,10 @@ public class BlackjackAccount extends Player implements Serializable {
     public void deposit(double funds) {
         balance += funds;
     }
+    
+    @Override
+    public String toString() {
+        return super.getName() + " " + wins + " " + balance;
+    }
 
 }

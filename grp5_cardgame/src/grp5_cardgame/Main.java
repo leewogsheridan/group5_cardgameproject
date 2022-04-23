@@ -1,7 +1,5 @@
 package grp5_cardgame;
 
-import java.util.Scanner;
-
 /**
  *
  * @author 727
