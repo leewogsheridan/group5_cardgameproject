@@ -7,11 +7,7 @@
  */
 package grp5_cardgame;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.EOFException;
+import java.io.*;
 import java.util.Scanner;
 
 /**
@@ -37,6 +33,8 @@ public class Blackjack extends Game {
         int playerScore = 0, dealerScore = 0;
         Scanner input = new Scanner(System.in);
         System.out.println("Blackjack Game:");
+        System.out.print("Bet: ");
+        betAmount = input.nextDouble();
         deck = new GroupOfCards(52);
         deck.create();
         playerHand = new PlayerHand(0);
@@ -90,6 +88,7 @@ public class Blackjack extends Game {
     public void declareWinner() {
         if (won) {
             System.out.println("Congratulations " + player.getName() + "! You have beat the computer and won $" + betAmount);
+            player.won();
         } else {
             System.out.println("GG " + player.getName() + "! ff go next. You lost $" + betAmount);
         }
@@ -113,17 +112,18 @@ public class Blackjack extends Game {
     }
 
     public void savePlayer() {
-        try ( ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream("player.dat"));) {
-            output.writeObject(player);
+        File file = new File("player.txt");
+        try (PrintWriter pw = new PrintWriter(file);) {
+            pw.print(player);
         } catch (Exception e) {
             System.out.println("ERROR saving player:" + e);
         }
     }
 
     public void loadPlayer() {
-        try ( ObjectInputStream input = new ObjectInputStream(new FileInputStream("player.dat"));) {
-            player = (BlackjackAccount) input.readObject();
-        } catch (EOFException f) {
+        try (Scanner in = new Scanner("player.txt");) {
+            player = new BlackjackAccount(in.next(), in.nextInt(), in.nextDouble());
+        } catch (java.util.NoSuchElementException ex) {
             player = new BlackjackAccount("Player1", 0, 0);
         } catch (Exception e) {
             System.out.println("Error getting account: " + e);
@@ -138,11 +138,4 @@ public class Blackjack extends Game {
         }
     }
 
-    public BlackjackAccount getPlayer() {
-        return player;
-    }
-
-    public void setPlayer(BlackjackAccount player) {
-        this.player = player;
-    }
 }
