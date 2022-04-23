@@ -11,6 +11,9 @@ public class Main {
      */
     public static void main(String[] args) {
         Blackjack game = new Blackjack("Blackjack");
+        Value[] c = Value.values();
+        for(Value i : c)
+            System.out.println(i.getValue());
         game.play();
     }
     

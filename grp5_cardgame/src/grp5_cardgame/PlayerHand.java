@@ -17,5 +17,4 @@ public class PlayerHand extends GroupOfCards {
     public PlayerHand(int size) {
         super(size);
     }
-    
 }

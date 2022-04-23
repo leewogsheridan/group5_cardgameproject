@@ -81,5 +81,21 @@ public class GroupOfCards {
     public void clear() {
         cards.clear();
     }
+    
+        
+    public int getHandValue() {
+        final int[] count = {0};
+        final boolean[] ace = {false};
+        getCards().forEach((c) -> {
+            int v = c.getValue().getValue();
+            count[0] += v;
+            ace[0] = v == 11;
+            if(count[0] > 21 && ace[0]) {
+                count[0] -= 10;
+                ace[0] = false;
+            }
+        });
+        return count[0];
+    }
 
 }//end class

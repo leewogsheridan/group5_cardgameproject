@@ -37,7 +37,14 @@ public class Blackjack extends Game {
         deck = new GroupOfCards(52);
         deck.create();
         playerHand = new PlayerHand(0);
+        playerHand.add(giveRandomCard());
+        playerHand.add(giveRandomCard());
+        //while(playerHand.getCards())
+        displayHand(true);
         dealerHand = new DealerHand(0);
+        dealerHand.add(giveRandomCard());
+        dealerHand.add(giveRandomCard());
+        displayHand(false);
         loadPlayer();
         won = false;
         savePlayer();
@@ -58,8 +65,20 @@ public class Blackjack extends Game {
         distributeWinnings();
     }
 
+    public void displayHand(Boolean playerTurn) {
+        if(playerTurn) {
+            System.out.println("\nYour Hand");
+            playerHand.getCards().forEach((c) -> System.out.println(c));
+            System.out.println("Value: " + playerHand.getHandValue());
+        } else {
+            System.out.println("\nDealer Hand");
+            dealerHand.getCards().forEach((c) -> System.out.println(c));
+            System.out.println("Value: " + dealerHand.getHandValue());
+        }
+    }
+    
     public void hit() {
-
+        
     }
 
     public void stand() {
