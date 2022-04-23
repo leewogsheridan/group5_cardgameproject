@@ -89,7 +89,7 @@ public class GroupOfCards {
         getCards().forEach((c) -> {
             int v = c.getValue().getValue();
             count[0] += v;
-            ace[0] = v == 11;
+            ace[0] = v == 11 || ace[0];
             if(count[0] > 21 && ace[0]) {
                 count[0] -= 10;
                 ace[0] = false;
