@@ -12,6 +12,7 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.EOFException;
+import java.util.Scanner;
 
 /**
  *
@@ -33,20 +34,50 @@ public class Blackjack extends Game {
 
     @Override
     public void play() {
+        int playerScore = 0, dealerScore = 0;
+        Scanner input = new Scanner(System.in);
         System.out.println("Blackjack Game:");
         deck = new GroupOfCards(52);
         deck.create();
         playerHand = new PlayerHand(0);
         playerHand.add(giveRandomCard());
         playerHand.add(giveRandomCard());
-        //while(playerHand.getCards())
         displayHand(true);
+        while(playerHand.getHandValue() < 21) {
+            System.out.println("Hit? Enter Y to hit, anything else would be considered stand.");
+            if(!input.next().toLowerCase().equals("y")) {
+                playerScore = playerHand.getHandValue();
+                break;
+            }
+            playerHand.add(giveRandomCard());
+            displayHand(true);
+            if(playerHand.getHandValue() > 21) {
+                System.out.println("Bust!");
+                playerScore = 0;
+            }
+        }
         dealerHand = new DealerHand(0);
         dealerHand.add(giveRandomCard());
         dealerHand.add(giveRandomCard());
         displayHand(false);
+        dealerScore = dealerHand.getHandValue();
+        System.out.println(dealerHand.getHandValue() < 17 ? "Dealer hits" : "Dealer stands");
+        while(dealerHand.getHandValue() < 17) {
+            dealerHand.add(giveRandomCard());
+            displayHand(false);
+            if(dealerHand.getHandValue() > 21) {
+                System.out.println("Bust!");
+                dealerScore = 0;
+            } else if(dealerHand.getHandValue() < 17) 
+                System.out.println("Dealer hits");
+            else {
+                System.out.println("Dealer stands");
+                dealerScore = dealerHand.getHandValue();
+            }
+        }
         loadPlayer();
-        won = false;
+        won = playerScore > dealerScore;
+        declareWinner();
         savePlayer();
     }
 
@@ -75,14 +106,6 @@ public class Blackjack extends Game {
             dealerHand.getCards().forEach((c) -> System.out.println(c));
             System.out.println("Value: " + dealerHand.getHandValue());
         }
-    }
-    
-    public void hit() {
-        
-    }
-
-    public void stand() {
-
     }
 
     public void bet(double betAmount) {
@@ -113,5 +136,13 @@ public class Blackjack extends Game {
         } else {
             player.deduct(betAmount);
         }
+    }
+
+    public BlackjackAccount getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(BlackjackAccount player) {
+        this.player = player;
     }
 }
